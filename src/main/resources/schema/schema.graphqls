@@ -1,0 +1,61 @@
+type Query {
+    shows(titleFilter: String): [Show]
+    users: [User!]!
+    user: User
+    courses: [Course!]!
+}
+
+type Course {
+    id: ID!
+    creator: String
+    title: String!
+    participants: [String!]
+}
+
+input InputCourse {
+    creator: ID!
+    title: String!
+}
+
+type User {
+    id: ID!
+    username: String
+    name: String
+    email: String
+    courses: [Course!]
+}
+
+input InputUser {
+    name: String,
+    userName: String,
+    email: String
+}
+
+type Mutation {
+    addReview(review: SubmittedReview): [Review]
+    addArtwork(showId: Int!, upload: Upload!): [Image]! @skipcodegen
+    addUser(inputUser: InputUser!): User
+    deleteUser(userId: String): Boolean
+    addCourse(inputCourse: InputCourse!): Course
+    enrollInCourse(courseId: String!, userId: String!): Course
+}
+
+type Review {
+    username: String
+    starScore: Int
+    submittedDate: DateTime
+}
+
+input SubmittedReview {
+    showId: Int!
+    username: String!
+    starScore: Int!
+}
+
+type Image {
+    url: String
+}
+
+scalar DateTime
+scalar Upload
+directive @skipcodegen on FIELD_DEFINITION

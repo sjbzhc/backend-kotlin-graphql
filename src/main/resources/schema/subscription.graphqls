@@ -1,0 +1,3 @@
+type Subscription {
+    reviewAdded(showId: Int!): Review
+}

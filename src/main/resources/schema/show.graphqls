@@ -1,0 +1,7 @@
+type Show {
+    id: Int!
+    title: String!
+    releaseYear: Int
+    reviews: [Review]
+    artwork: [Image]
+}
